@@ -1,0 +1,130 @@
+<html href="" id="">
+
+    
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+ <style>
+     body {
+         background-image: url(regcover.jpeg);
+         background-size: cover;
+          }
+     .reg {
+         margin-top: 100px;
+     }
+     .reg .card {
+         background: rgba(0,0,0,.3);
+     }
+     .reg label{
+         font-size: 16px;
+         color: black;
+     }
+     .reg input {
+         font-size: 20px !important;
+         color: black;
+     }
+     .reg button:hover{
+         padding: 0px 50px;
+     }
+     .reg button1:hover{
+         padding: 0px 50px;
+     }
+    </style>
+ <body>
+ <div class="row reg">
+        <div class="col s12 l4 offset-l5">
+        <div class="card">
+            <div class="card-action transparent lighten-2 black-text center-align">
+                <h4 class="black-text text-darken-2">REGISTER TO FOOD WEB!</h4>
+            </div>
+            <div class="card-content">
+                
+                <div class="form-field">
+                <label class="white-text" for="FNAME">FIRST NAME</label>
+                <input type="text" id="FNAME">
+                </div><br>
+                
+                  <div class="form-field">
+                <label class="white-text" for="LNAME">LAST NAME</label>
+                <input type="text" id="LNAME">
+                </div><br>
+                
+                  <div class="form-field">
+                <label class="white-text" for="GENDER">GENDER</label>
+                <input type="radio" id="GENDER">
+                <p>
+                    <label>
+                    <input name="group1" type="radio" />
+                    <span class="black-text text-darken-4">MALE</span>
+                    </label>
+                </p>
+                      <p>
+                    <label>
+                    <input name="group1" type="radio" />
+                    <span class="black-text text-darken-4">FEMALE</span>
+                    </label>
+                </p>
+                </div><br><br>
+                
+                   <div class="form-field">
+                <label class="white-text" for="EMAIL">EMAIL</label>
+                <input type="text" id="EMAIL">
+                </div><br>
+                
+                   <div class="form-field">
+                <label class="white-text" for="PHONE">PHONE NO.</label>
+                <input type="text" id="PHONE">
+                </div><br>
+                
+                   <div class="form-field">
+                <label class="white-text" for="ADDR">ADDRESS</label>
+                <input type="text" id="ADDR">
+                </div><br>
+                
+                   <div class="form-field">
+                <label class="white-text" for="DOB">DATE OF BIRTH</label>
+                <input type="text" id="DOB" class="datepicker">
+                </div><br>
+                
+                <p class="center-align"><button1 class="btn-large indigo darken-2 waves-effect waves-dark">REGISTER</button1></p>
+                
+                 <div class="form-field center-align">
+                     <p class="white-text">Already have an account? Click here to Login</p>
+                <button class="btn-large red darken-2 waves-effect waves-dark">Login</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+     
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+      $('.materialboxed').materialbox();
+      $('.parallax').parallax();
+      $('.tabs').tabs();
+      $('.datepicker').datepicker();
+      $('.tooltipped').tooltip();
+      $('.scrollspy').scrollSpy();
+    });
+  </script>
+    </body>   
+</html>

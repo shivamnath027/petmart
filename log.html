@@ -1,0 +1,85 @@
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+ <style>
+     body {
+         background-image: url(logcover.jpeg);
+         background-size: cover;
+          }
+     .login {
+         margin-top: 40px;
+     }
+     .login .card {
+         background: rgba(0,0,0,.3);
+     }
+     .login label{
+         font-size: 16px;
+         color: black;
+     }
+     .login input {
+         font-size: 20px !important;
+         color: black;
+     }
+     .login button:hover{
+         padding: 0px 40px;
+     }
+     .login button1:hover{
+         padding: 0px 30px;
+     }
+    
+    </style>
+    <body>
+    <div class="row login">
+        <div class="col s12 l4 offset-l4">
+        <div class="card">
+            <div class="card-action transparent lighten-2 black-text center-align">
+                <h3>LOGIN TO FOOD WEB!</h3>
+            </div>
+            <form>
+            <div class="card-content">
+            <div class="form-field">
+                
+                <label class="white-text" for="email">Email</label>
+                <input type="text" id="username">
+                </div><br>
+                
+                 <div class="form-field">
+                <label class="white-text" for="password">Password</label>
+                <input type="password" id="password">
+                </div><br>
+                
+                <div class="form-field center-align">
+                <button class="btn-large red darken-2 waves-effect waves-dark">Login</button>
+                </div>
+                
+                <p class="center-align white-text">New User? Click here to register</p>
+                <p class="center-align">  <button1 href="#reg.html" class="btn-small INDIGO darken-2 waves-effect waves-dark">REGISTER</button1></p>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+      $('.materialboxed').materialbox();
+      $('.parallax').parallax();
+      $('.tabs').tabs();
+      $('.datepicker').datepicker();
+      $('.tooltipped').tooltip();
+      $('.scrollspy').scrollSpy();
+    });
+  </script>
+    </body>  
+</html>

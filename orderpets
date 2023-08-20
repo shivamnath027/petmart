@@ -1,0 +1,634 @@
+<?php
+session_start();
+?>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <title>ORDER NOW</title>
+  <style>
+      .p{ background-image: url(cvr.jpg);
+          background: cover;
+      }
+            .p .ch{
+            background: rgba(0,0,0,.5);
+      }
+    @media screen and (max-width: 670px){
+      header{
+        min-height: 500px;
+      }
+    }
+    .section{
+      padding-top: 4vw;
+      padding-bottom: 4vw;
+    }
+    .tabs .indicator{
+      background-color: #1a237e;
+    }
+    .tabs .tab a:focus, .tabs .tab a:focus.active{
+      background: transparent;
+    }
+        .reg .cd {
+            background-color: #e1bee7;
+         background: rgba(0,0,0,.3);
+     }
+      .ali
+      {
+          padding-top: 5px;
+      }
+      .bt{
+          padding-left: 500px;
+      }
+  </style>
+</head>
+    
+<!-- navbar -->
+<body>
+<header> 
+    <nav class="nav-wrapper black">
+      <div class="container">
+        <a href="#" class="brand-logo">Order here!</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="main.php" class="tooltipped btn-floating btn-small black" data-position="bottom" data-tooltip="HOME"> 
+            <i class="material-icons">home</i></a></li>
+            <li><a href="myorders.php" class="tooltipped btn-floating btn-small black" data-position="bottom" data-tooltip="CART"> 
+            <i class="material-icons">shopping_cart</i></a></li>
+            <li><a  href='#' class='dropdown-trigger btn-floating btn-small black' data-target='dropdown1'><i class="material-icons left">account_box</i></a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="account.php"><i class="material-icons right">info</i>Account Info</a></li>
+            <li><a href="logout.php">Logout</a></li>
+            </ul></li>
+          </ul>
+      </div>
+    </nav>
+  </header>
+    
+ 
+    <div class="slider">
+    <ul class="slides">
+      <li>
+        <img class="img-responsive" src="dogimg/d5.jpeg" > <!-- random image -->
+        <div class="caption center-align black-text text-darken-1">
+          <h3>WELCOME TO PET MART!</h3>
+          <h5 class="light grey-text text-lighten-3"></h5>
+        </div>
+      </li>
+      <li>
+        <img class="img-responsive" src="dogimg/b5.jpeg"> <!-- random image -->
+        <div class="caption left-align white-text">
+          <h2>PET MART!</h2>
+          <h3 class="light white-text text-darken-2 ">DONT SHOP...ADOPT</h3>
+        </div>
+      </li>
+      <li>
+        <img class="img-responsive" src="dogimg/c2.jpeg"> <!-- random image -->
+        <div class="caption right-align white-text">
+          <h2>PET MART!</h2>
+          <h4 class="light white-text text-darken-2">PAWS TO ERASE YOUR FLAWS </h4>
+        </div>
+      </li>
+      <li>
+        <img class="img-responsive" src="dogimg/p3.jpeg"> <!-- random image -->
+        <div class="caption left-align white-text text-darken-2">
+          <h1>NEED TO ADAPT?</h1><br>
+          <h3 class="white-text left-align text-darken-2">NO! JUST ADOPT</h3>
+        </div>
+      </li>
+    </ul>
+  </div>
+    
+<!-- Modal Structure -->
+  <form action="#" method="POST">
+        <div id="dose" class="modal">
+    <div class="modal-content">
+      <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">fastfood</i>
+          <input type="text" id="autocomplete-input" name="itemname" class="autocomplete">
+          <label for="autocomplete-input">Item Name</label>
+          </div>
+      </div>
+    </div>
+  </div>
+        <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">queue</i>
+        <input name="quantity" id="quantity" type="number" min="0" max="15">
+          <label for="quantity">Quantity</label>    
+        </div>
+        <div class="input-field col s6">
+         
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+            <button class="btn-small cyan white-text" type="submit" name="submit">ADD</button>
+        </div>
+        </div>
+    </div>
+  </div>
+</form>
+        
+<?php      
+$host="localhost";
+$user="root";
+$password="";
+$db="foodweb";
+$con=mysqli_connect($host,$user,$password,$db);
+if(isset($_POST['submit']))
+{
+        $v1=$_SESSION["fname"];
+        $v2=$_SESSION["lname"];
+        $v3=$_SESSION["mobile"];
+        $v4=$_SESSION["dob"];
+        $v5=$_SESSION["email"];
+        $v6=$_SESSION["gender"];
+        $v7=$_SESSION["address"];
+        $v8=$_POST["itemname"];
+        $v9=$_POST["quantity"];
+        $query="INSERT INTO orders(email,fname,mobile,address,itemname,quantity,datetime) VALUES('$v5','$v1','$v3','$v7','$v8', '$v9',now())";
+        $result=mysqli_query($con,$query);
+        if($result)
+        {  echo "<script>
+           alert('ADDED SUCCESSFULLY TO YOUR CART!');
+           window.location.assign('order.php'); 
+           </script>";
+           exit();
+        }
+}
+?>
+        
+<ul class="collapsible popout p">  
+<!--breakfast--> 
+    <li class="l">
+      <div class="collapsible-header ch"><h5 class="black-text bt"><i class="material-icons">list</i>BREAKFAST</h5></div>
+      <div class="collapsible-body"><span>
+    <section class="container section row scrollspy " id="ORDER NOW">
+        <div class="row reg">
+        <div class="col s12 l12">
+        <div class="card-panel hoverable cd">
+        <div class="card-action transparent lighten-2 black-text">
+   <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="dose.png">
+          <span class="card-title">Butter Masala Dosa</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Butter Masala Dosa</h5>
+          <p>Served with alu sabji and 2 types of chutneys</p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="idli.jpg">
+          <span class="card-title">Idli Vada</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Idli Vada</h5>
+          <p>Served with sambar and chutney (Idli-3 & Vada-1)</p>
+          <p class="indigo-text">Price: &#8377;40</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="paratha.jpg">
+          <span class="card-title">Alu Paratha</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Alu Paratha</h5>
+          <p>Served with fresh curd and mango pickle</p>
+          <p class="indigo-text">Price: &#8377;40</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="chole.jpg">
+          <span class="card-title">Chole Bhature</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">Chole Bhature</h5>
+          <p>Served with spicy Kabuli Channa curry</p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 offset-l3">
+      <div class="card">
+        <div class="card-image">
+          <img src="poha.jpg">
+          <span class="card-title">Poha</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Poha</h5>
+          <p>Served with coconut chutney</p>
+          <p class="indigo-text">Price: &#8377;30</p>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+</div>
+</div> 
+</div>
+</section>
+</span>
+</div>
+</li>
+           
+            
+<!--meals-->     
+    <li class="l">
+      <div class="collapsible-header ch"><h5 class="black-text bt"><i class="material-icons">list</i>MEALS</h5></div>
+      <div class="collapsible-body"><span>
+    <section class="container section row scrollspy " id="ORDER NOW">
+        <div class="row reg">
+        <div class="col s12 l12">
+        <div class="card-panel hoverable cd">
+        <div class="card-action transparent lighten-2 black-text">
+   <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="south%20indian.jpg">
+          <span class="card-title">South Indian Meals</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">South Indian Meals</h5>
+          <p></p>
+          <p class="indigo-text">Price: &#8377;100</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="north%20indian.jpeg">
+          <span class="card-title">North Indian Meals</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">North Indian Meals</h5>
+          <p></p>
+          <p class="indigo-text">Price: &#8377;100</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="hydrabadi.jpg">
+          <span class="card-title">Hydrabadi Meals</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light red pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+        <h5 class="black-text darken-4">Hydrabadi Meals</h5>
+          <p></p>
+          <p class="indigo-text">Price: &#8377;150</p> 
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="Rajasthani.jpg">
+          <span class="card-title">Rajasthani Meals</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light red pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+        <h5 class="black-text darken-4">Rajasthani Meals</h5>
+          <p></p>
+          <p class="indigo-text">Price: &#8377;150</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 offset-l3">
+      <div class="card">
+        <div class="card-image">
+          <img src="punjabi.jpg">
+          <span class="card-title">Punjabi Meals</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">Punjabi Meals</h5>
+          <p></p>
+          <p class="indigo-text">Price: &#8377;120</p> 
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+</div>
+</div> 
+</div>
+</section>
+</span>
+</div>
+</li>    
+            
+            
+            
+<!--fastfood-->
+       <li class="l">
+      <div class="collapsible-header ch"><h5 class="black-text bt"><i class="material-icons">list</i>FAST FOOD</h5></div>
+      <div class="collapsible-body"><span>
+    <section class="container section row scrollspy " id="ORDER NOW">
+        <div class="row reg">
+        <div class="col s12 l12">
+        <div class="card-panel hoverable cd">
+        <div class="card-action transparent lighten-2 black-text">
+   <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="gobi.jpeg">
+          <span class="card-title">Gobi Manchurian</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Gobi Manchurian</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="vadapav.jpg">
+          <span class="card-title">Vada Pav</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Vada Pav</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;35</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="cutlet.jpg">
+          <span class="card-title">Chicken Cutlet</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light red pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Chicken Cutlet</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;80</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="noodles.jpg">
+          <span class="card-title">Chinese Noodles</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Chinese Noodles</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 offset-l3">
+      <div class="card">
+        <div class="card-image">
+          <img src="pasta.jpg">
+          <span class="card-title">Italian Pasta</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light red pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Italian Pasta</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+</div>
+</div> 
+</div>
+</section>
+</span>
+</div>
+</li>
+    
+<!--beverages-->
+            <li class="l">
+      <div class="collapsible-header ch"><h5 class="black-text bt"><i class="material-icons">list</i>BEVERAGES</h5></div>
+      <div class="collapsible-body"><span>
+    <section class="container section row scrollspy " id="ORDER NOW">
+        <div class="row reg">
+        <div class="col s12 l12">
+        <div class="card-panel hoverable cd">
+        <div class="card-action transparent lighten-2 black-text">
+   <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="mangolassi.jpg">
+          <span class="card-title">Mango Lassi</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">Mango Lassi</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;40</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="strewberryms.jpg">
+          <span class="card-title">Strawberry Milkshake</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Strawberry Milkshake</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;50</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="soda.jpg">
+          <span class="card-title">Masala Soda</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Masala Soda</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;20</p>
+        </div>
+      </div>
+    </div>      
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="tea.jpg">
+          <span class="card-title">Ginger Tea</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <h5 class="black-text darken-4">Ginger Tea</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;20</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 offset-l3">
+      <div class="card">
+        <div class="card-image">
+          <img src="coke.jpg">
+          <span class="card-title">Coke</span>
+          <a href="#dose" class="btn-floating halfway-fab waves-effect waves-light green pulse pulse modal-trigger"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+         <h5 class="black-text darken-4">Coke</h5>
+            <p></p>
+          <p class="indigo-text">Price: &#8377;25</p>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+</div>
+</div> 
+</div>
+</section>
+</span>
+</div>
+</li>
+</ul> 
+        
+<!-- footer -->
+  <footer class="page-footer grey darken-3">
+    <div class="container"  id="ABOUT US">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5>About Us</h5>
+          <p>DBMS Mini Project: FOOD WEB</p>
+          <p>Created By: AMUL (1SG16CS008) &  ADARSH R M (1SG16CS003)</p>
+          <p>Submitted To: Mrs. Kavya N L & Mrs. Nanda M B</p>   
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#">Facebook</a></li>
+            <li><a class="grey-text text-lighten-3" href="#">Twitter</a></li>
+            <li><a class="grey-text text-lighten-3" href="#">Linked In</a></li>
+            <li><a class="grey-text text-lighten-3" href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright grey darken-4">
+      <div class="container center-align">&copy; 2018 FOOD WEB</div>
+    </div>
+  </footer>
+    
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red pulse">
+    <i class="large material-icons">find_in_page</i>
+  </a>
+  <ul>
+    <li><a href="main.php" class=" btn-floating purple darken-2" data-position="left" data-tooltip="HOME"><i class="material-icons">home</i></a></li>
+    <li><a href="myorders.php" class="btn-floating yellow darken-1" data-position="left" data-tooltip="CART"><i class="material-icons">shopping_cart</i></a></li>
+    <li><a href="account.php" class=" btn-floating green" data-position="left" data-tooltip="PROFILE"><i class="material-icons">account_box</i></a></li>
+    <li><a href="logout.php" class="btn-floating blue" data-position="left" data-tooltip="LOGOUT"><i class="material-icons">person_add_disabled</i></a></li>
+  </ul>
+</div>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+      $('.materialboxed').materialbox();
+      $('.parallax').parallax();
+      $('.tabs').tabs();
+      $('.datepicker').datepicker({ disableWeekends: true,yearRange: 1});
+      $('.tooltipped').tooltip();
+      $('.scrollspy').scrollSpy();
+      $('.slider').slider({indicators: false,height:290,interval: 2500}); 
+      $('.carousel').carousel();
+      $('.collapsible').collapsible();
+      $('.modal').modal();
+      $('.dropdown-trigger').dropdown();
+      $('.fixed-action-btn').floatingActionButton();
+      $('input.autocomplete').autocomplete({
+      data: {
+        "Butter Masala Dosa": null,
+        "Idli Vada": null,
+        "Alu Paratha": null,
+        "Chole Bhature": null,
+        "Poha": null,
+        "South Indian Meal": null,
+          "North Indian Meal": null,
+          "Hydrabadi Meal": null,
+          "Punjabi Meal": null,
+          "Rajastani Meal": null,
+          "Gobi Manchurian": null,
+          "Vada Pav": null,
+          "Italian Pasta": null,
+          "Chicken Cutlet": null,
+          "Chinese Noodles": null,
+          "Mango Lassi": null,
+          "Strawberry Milkshake": null,
+          "Masala Soda": null,
+          "Ginger Tea": null,
+          "Coke": null,
+      },
+    });
+    });
+  </script>
+</body>
+</html>
